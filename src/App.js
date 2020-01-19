@@ -3,6 +3,7 @@ import Clarifai from 'clarifai';
 
 import Navigation from './components/Navigation/Navigation';
 import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
@@ -104,9 +105,7 @@ class App extends React.Component {
         <Particles className="particles" params={particlesOptions} />
 
         <Navigation onRouteChange={this.onRouteChange} />
-        {this.state.route === 'signin' ? (
-          <SignIn onRouteChange={this.onRouteChange} />
-        ) : (
+        {this.state.route === 'home' ? (
           <div>
             <Logo />
             <Rank />
@@ -116,6 +115,10 @@ class App extends React.Component {
             />
             <FaceRecogition imageUrl={imageUrl} box={box} />
           </div>
+        ) : this.state.route === 'signin' ? (
+          <SignIn onRouteChange={this.onRouteChange} />
+        ) : (
+          <Register onRouteChange={this.onRouteChange} />
         )}
       </div>
     );
