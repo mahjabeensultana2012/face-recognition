@@ -110,9 +110,19 @@ class App extends React.Component {
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
       //'https://samples.clarifai.com/face-det.jpg'
 
-      .then(response =>
-        this.displayFaceBox(this.calculateFaceLocation(response))
-      )
+      .then(response => {
+        if (response) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: this.state.user.id,
+            }),
+          });
+        }
+
+        this.displayFaceBox(this.calculateFaceLocation(response));
+      })
       .catch(err => console.log(err));
 
     // console.log(
